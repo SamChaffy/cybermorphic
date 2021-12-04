@@ -1,0 +1,18 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="netrdb_app.data_sources.views.CMDBViewset.status_code" />
+          <option value="netrdb_app.data_sources.models.CMDB.objects" />
+          <option value="django.contrib.auth.mixins.AccessMixin.dispatch" />
+          <option value="django.forms.forms.CheckboxInput" />
+          <option value="chafemy.users.models.Profile.*" />
+          <option value="chafemy.extras.models.ImageFieldFileNameMixin.storage" />
+          <option value="chafemy.extras.models.ImageFieldFileNameMixin.*" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
