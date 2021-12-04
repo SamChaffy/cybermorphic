@@ -1,0 +1,111 @@
+{% load rest_framework %}
+<section id="contact" class="contact">
+    <div class="container">
+
+
+      <div class="section-title">
+        <h2>Contact</h2>
+        <p>
+            If you need help in any of the topics above, drop us a message. We will get back to you as soon as possible. We will reply faster if the need revolves around
+            homework or due too soon assignments. At the meantime, please sign in first !
+        </p>
+      </div>
+
+      <div class="row">
+
+        <div class="col-lg-5 d-flex align-items-stretch">
+          <div class="info">
+              <div class="address">
+                <i class="bi bi-geo-alt"></i>
+                <h4>Location:</h4>
+                <p> 2641 John F. Kennedy Blvd,
+              Jersey City, NJ 07306
+              United States</p>
+              </div>
+
+              <div class="email">
+                <i class="bi bi-envelope"></i>
+                <h4>Email:</h4>
+                <p>cybermorphic@gmail.com</p>
+              </div>
+
+              <div class="phone">
+                <i class="bi bi-phone"></i>
+                <h4>Call:</h4>
+                <p>+1 5589 55488 55s</p>
+              </div>
+
+              <iframe src="https://maps.google.com/maps?q=2641%20John%20F.%20Kennedy%20Blvd,%20Jersey%20City,%20NJ%2007306%20United%20States&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" style="border:0; width: 99%; height: 290px;" allowfullscreen></iframe>
+
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
+
+          <form  id="contact-form" method="POST" class="php-email-form">
+            {% csrf_token %}
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label for="id_name">Your Name</label>
+                <input type="text" name="name" class="form-control" id="id_name" required>
+              </div>
+              <div class="form-group col-md-6 mt-3 mt-md-0">
+                <label for="id_email">Your Email</label>
+                <input type="email" class="form-control" name="email" id="id_email" required>
+              </div>
+            </div>
+            <div class="form-group mt-3">
+              <label for="id_subject">Subject</label>
+              <input type="text" class="form-control" name="subject" id="id_subject" required>
+            </div>
+            <div class="form-group mt-3">
+              <label for="id_message">Message</label>
+              <textarea class="form-control" name="message" id="id_message" rows="10" required></textarea>
+            </div>
+            <div class="text-center"><button type="submit">Send Message</button></div>
+          </form>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+  {% block javascript %}
+<script>
+  /*
+      On submiting the form, send the POST ajax
+      request to server and after successfull submission
+      display the object.
+  */
+  $("#contact-form").submit(function (e) {
+      // preventing from page reload and default actions
+      e.preventDefault();
+      // serialize the data for sending the form data.
+      var serializedData = $(this).serialize();
+      console.log(serializedData);
+      // make POST ajax call
+      $.ajax({
+          type: 'POST',
+          url: "{% url 'core:contact-list' %}",
+          data: serializedData,
+          success: function (response) {
+              // on successfull creating object
+              // 1. clear the form.
+              $("#contact-form").trigger('reset');
+              $.notify("Your message has been sent. Thank you!", "success");
+
+          },
+
+          error: function (response) {
+              // alert the error if any error occured
+              $.notify(response["responseText"], "Danger");
+          }
+      })
+  })
+
+</script>
+{% endblock javascript%}
+
+
